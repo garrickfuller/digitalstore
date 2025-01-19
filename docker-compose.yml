@@ -1,0 +1,16 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: codeshop-mysql
+    environment:
+      - MYSQL_DATABASE=codeshop
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_USER=codeshopuser
+      - MYSQL_PASSWORD=codeshoppass
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
