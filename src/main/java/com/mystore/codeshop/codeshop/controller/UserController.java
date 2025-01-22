@@ -4,6 +4,9 @@ package com.mystore.codeshop.codeshop.controller;
 
 import com.mystore.codeshop.codeshop.entity.User;
 import com.mystore.codeshop.codeshop.service.UserService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,16 +25,18 @@ public class UserController {
     }
 
     /**
-     * Register a new user.
+     * Register a new user. @Valid will use jakarta 
+     * bean validation to check to make sure user inputs valid entriea
      * JSON body:
      * {
-     *   "username": "johndoe",
      *   "email": "john@example.com",
      *   "password": "secret"
+     *   "role": "user",
+     *   "username": johndoe
      * }
      */
     @PutMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
+    public ResponseEntity<User> registerUser(@Valid @RequestBody User user) {
         User savedUser = userService.registerUser(user);
         return ResponseEntity.ok(savedUser);
     }
