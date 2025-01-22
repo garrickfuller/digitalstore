@@ -1,7 +1,7 @@
 package com.mystore.codeshop.codeshop.controller;
 
 
-import com.mystore.codeshop.codeshop.repository.UserRepository;
+
 import com.mystore.codeshop.codeshop.entity.User;
 import com.mystore.codeshop.codeshop.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +48,7 @@ public class UserController {
     /**
      * Get a single user by ID.
      */
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         Optional<User> userOpt = userService.findById(id);
         if (userOpt.isPresent()) {
@@ -61,7 +61,7 @@ public class UserController {
     /**
      * Update a user's info
      */
-    @PutMapping("/{id}")
+    @PutMapping("/id/{id}")
     public ResponseEntity<User> updateUser(
             @PathVariable Long id,
             @RequestBody User updatedUser) {
@@ -76,7 +76,7 @@ public class UserController {
     /**
      * Delete a user by ID.
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         boolean deleted = userService.deleteUser(id);
         if (deleted) {
