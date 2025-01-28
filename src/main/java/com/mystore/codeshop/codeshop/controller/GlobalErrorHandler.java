@@ -7,6 +7,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import com.mystore.codeshop.codeshop.exceptions.UserAlreadyExistsException;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -79,4 +82,15 @@ public class GlobalErrorHandler {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(body);
     }
+
+    /*
+     * This allows for a global handle of User Already exists error when user tries to sign up and they are already registered
+     * I wanted to be able to easily see this error message so I made this
+     */
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleUserAlreadyExistsException(UserAlreadyExistsException e) {
+        return e.getMessage();
+    }
+
 }

@@ -2,6 +2,8 @@ package com.mystore.codeshop.codeshop.service;
 
 import com.mystore.codeshop.codeshop.entity.User;
 import com.mystore.codeshop.codeshop.repository.UserRepository;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,17 +13,27 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
-    // Constructor Injection
-    public UserService(UserRepository userRepository) {
+    // Constructor Injection for these beans
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
      * Register a new user and save to the database.
      */
     public User registerUser(User user) {
-        // later i need to check if user already exists and encrypt password
+
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            throw new RuntimeException("User with this username already exists.");
+        }
+
+        //hash the password that the user creates and then resave as encrypted
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        // only store the hash in DB
         return userRepository.save(user);
     }
 
@@ -49,14 +61,16 @@ public class UserService {
     public Optional<User> updateUser(Long id, User updatedUser) {
         return userRepository.findById(id)
                 .map(existingUser -> {
-                    // later going to pick which fields from updatedUser you want to allow updates to
-                    existingUser.setUsername(updatedUser.getUsername());
-                    existingUser.setPassword(updatedUser.getPassword());
-                    
-                    // existingUser.setEmail(updatedUser.getEmail());
-                    // existingUser.setRole(updatedUser.getRole());
+                    if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+                        // making sure password is hashed before updating
+                        existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+                    }
+                    //not really sure if this even makes it faster/better but keeping if statements here for time being
+                    if (existingUser.getUsername() != null) {
+                        
+                        existingUser.setUsername(updatedUser.getUsername());
 
-                    userRepository.save(existingUser); // save changes
+                    }
                     return existingUser;
                 });
     }

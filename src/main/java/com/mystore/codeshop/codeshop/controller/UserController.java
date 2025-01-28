@@ -64,12 +64,16 @@ public class UserController {
     }
 
     /**
-     * Update a user's info
+     * Update a user's info, only username and password
      */
     @PutMapping("/id/{id}")
     public ResponseEntity<User> updateUser(
             @PathVariable Long id,
             @RequestBody User updatedUser) {
+        
+
+        
+         
         Optional<User> userOpt = userService.updateUser(id, updatedUser);
         if (userOpt.isPresent()) {
             return ResponseEntity.ok(userOpt.get());
