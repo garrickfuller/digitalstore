@@ -2,7 +2,6 @@ package com.mystore.codeshop.entity;
 
 import java.util.HashSet;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -47,8 +46,13 @@ public class User {
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    /* For future reference this is Eager because apparently
+     * This happens because your code is trying to access the user’s roles after 
+     * the Hibernate session is closed. By default, if you map @ManyToMany(fetch = FetchType.LAZY), 
+     * the roles aren’t loaded until you try to access them. In your JWT filter, you call user.getRoles(), 
+     * which triggers the lazy load, but there’s no open Hibernate session at that time—leading to this exception.
+     */
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(  name = "user_roles", 
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "role_id"))

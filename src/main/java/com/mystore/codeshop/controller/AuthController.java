@@ -99,9 +99,11 @@ public class AuthController {
                encoder.encode(signUpRequest.getPassword()));
 
     Set<String> strRoles = signUpRequest.getRole();
+    System.out.println("Received roles: " + strRoles);
+
     Set<Role> roles = new HashSet<>();
 
-    if (strRoles == null) {
+    if (strRoles == null || strRoles.isEmpty()) {  // Default role if nonee is sent
       Role userRole = RoleRepository.findByName(ERole.ROLE_USER)
           .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
       roles.add(userRole);
