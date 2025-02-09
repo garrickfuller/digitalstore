@@ -1,8 +1,0 @@
-/Users/garrickfuller/digitalstore/digitalstore/src/main/java/com/mystore/codeshop/codeshop/CodeshopApplication.java
-/Users/garrickfuller/digitalstore/digitalstore/src/main/java/com/mystore/codeshop/codeshop/controller/GlobalErrorHandler.java
-/Users/garrickfuller/digitalstore/digitalstore/src/main/java/com/mystore/codeshop/codeshop/controller/UserController.java
-/Users/garrickfuller/digitalstore/digitalstore/src/main/java/com/mystore/codeshop/codeshop/entity/User.java
-/Users/garrickfuller/digitalstore/digitalstore/src/main/java/com/mystore/codeshop/codeshop/exceptions/UserAlreadyExistsException.java
-/Users/garrickfuller/digitalstore/digitalstore/src/main/java/com/mystore/codeshop/codeshop/repository/UserRepository.java
-/Users/garrickfuller/digitalstore/digitalstore/src/main/java/com/mystore/codeshop/codeshop/security/SecurityConfig.java
-/Users/garrickfuller/digitalstore/digitalstore/src/main/java/com/mystore/codeshop/codeshop/service/UserService.java
