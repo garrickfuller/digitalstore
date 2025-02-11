@@ -1,6 +1,6 @@
 # digitalstore
 
-Overview
+
 This project is a simple e-commerce web application focused on selling digital codes (e.g., license keys, vouchers, gift codes). Users can register, log in, browse products (codes), make purchases, and receive their codes automatically. An admin panel will be included for managing inventory, orders, and refunds.
 
 Current Setup 
