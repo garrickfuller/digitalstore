@@ -1,9 +1,14 @@
 # digitalstore
 
+ DigitalStore is an e-commerce web application focused on selling digital codes (e.g., license keys, vouchers, gift codes). Users can register, log in, browse products (codes), make purchases, and receive their codes automatically. An admin panel will be included for managing inventory, orders, and refunds. I built this to handle the massive amount of digital codes I was selling manually everyday to help reduce my manual workload :)
 
-DigitalStore is an e-commerce web application focused on selling digital codes (e.g., license keys, vouchers, gift codes). Users can register, log in, browse products (codes), make purchases, and receive their codes automatically. An admin panel will be included for managing inventory, orders, and refunds.
+<img width="230" alt="Screenshot 2025-02-24 at 12 47 57 AM" src="https://github.com/user-attachments/assets/9f9e13a0-a313-4efb-ba4c-c4cf472db028" />
 
-##Current Setup 
+
+
+
+
+## Current Setup 
 
 Backend - Spring Boot
 
