@@ -18,6 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.mystore.codeshop.security.jwt.AuthEntryPointJwt;
 import com.mystore.codeshop.security.jwt.AuthTokenFilter;
 import com.mystore.codeshop.service.UserDetailsServiceImpl;
+import static org.springframework.security.config.Customizer.withDefaults;
+
 /**
  * Configuration class for Spring Security.
  * 
@@ -78,11 +80,13 @@ public class WebSecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
+        .cors(withDefaults())
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> 
           auth.requestMatchers("/api/auth/**").permitAll()
               .requestMatchers("/api/test/**").permitAll()
+              .requestMatchers("/api/products/**").permitAll()
               .anyRequest().authenticated()
         );
     

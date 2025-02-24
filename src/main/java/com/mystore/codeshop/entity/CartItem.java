@@ -1,5 +1,7 @@
 package com.mystore.codeshop.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +15,7 @@ public class CartItem {
     // Each cart item belongs to one cart
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cart_id")
+    @JsonBackReference
     private Cart cart;
 
     // Each cart item represents a product added to the cart
